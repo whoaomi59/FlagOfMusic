@@ -15,16 +15,12 @@ export default function TrackMusic() {
           className="rounded-md w-[65px]"
           alt="music"
         />
-        <div className="flex flex-col gap-1">
-          <span className="text-[15px] font-medium opacity-85">Night Wolf</span>
-          <span className="text-[13px] text-[#b3b3b3]">The villians</span>
-        </div>
       </div>
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-4 w-full">
-          <BackwardIcon width="27px" height="27px" />
-          <PauseCircleIcon width="45px" height="45px" />
-          <ForwardIcon width="27px" height="27px" />
+          <BackwardIcon width="37px" />
+          <PauseCircleIcon width="60px" />
+          <ForwardIcon width="37px" />
           <div className="flex items-center w-full gap-2">
             <span className="text-[#b3b3b3] text-[14px] font-medium md:block hidden">
               00:00

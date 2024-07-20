@@ -74,13 +74,18 @@ function App() {
   };
 
   return (
-    <div className="w-full h-full text-white relative">
-      <Layout />
+    <div className="min-h-screen text-white">
+      <Layout
+        showResults={showResults}
+        playlist={playlist}
+        currentVideoIndex={currentVideoIndex}
+        setCurrentVideoIndex={setCurrentVideoIndex}
+      />
       <Appbar
         searchQuery={searchQuery}
         handleInputChange={handleInputChange}
         handleSearch={handleSearch}
-      />{" "}
+      />
       {playlist.length > 0 ? (
         <main className="p-6">
           {videoInfo && (

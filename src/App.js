@@ -6,6 +6,7 @@ import Page404 from "./layout/404";
 import Appbar from "./components/Menu_Navigate";
 import TrackMusic from "./components/track_music";
 import PLayList from "./pages/play_List";
+import Layout from "./layout/layout";
 
 const KEY = "AIzaSyBpiMLwFIt0tCEtFXU5L_gQkiaReQNy5GI";
 
@@ -73,12 +74,13 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="w-full h-full text-white relative">
+      <Layout />
       <Appbar
         searchQuery={searchQuery}
         handleInputChange={handleInputChange}
         handleSearch={handleSearch}
-      />
+      />{" "}
       {playlist.length > 0 ? (
         <main className="p-6">
           {videoInfo && (

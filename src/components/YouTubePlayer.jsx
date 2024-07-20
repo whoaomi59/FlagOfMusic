@@ -23,7 +23,6 @@ const YouTubePlayer = ({
   const [valVol, setVlue] = useState("");
   const [status, setStatus] = useState(true);
   const [progress, setProgress] = useState(0);
-  console.log("🚀 ~ YouTubePlayer ~ progress:", progress);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -95,7 +94,7 @@ const YouTubePlayer = ({
       <div className="flexx p-2">
         {currentVideoIndex > 0 && (
           <button
-            class="p-3 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none"
+            class="p-3 rounded-full bg-gray-900 hover:bg-gray-700 focus:outline-none"
             onClick={AnterioPlay}
           >
             <BackwardIcon className="w-5" />
@@ -103,14 +102,14 @@ const YouTubePlayer = ({
         )}
         {status ? (
           <button
-            className="p-4 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none mx-4"
+            className="p-4 rounded-full bg-gray-900 hover:bg-gray-700 focus:outline-none mx-4"
             onClick={handlePause}
           >
             <PauseCircleIcon className="w-7" />
           </button>
         ) : (
           <button
-            className="p-4 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none mx-4"
+            className="p-4 rounded-full bg-gray-900 hover:bg-gray-700 focus:outline-none mx-4"
             onClick={handlePlay}
           >
             <PlayIcon className="w-7" />
@@ -118,7 +117,7 @@ const YouTubePlayer = ({
         )}
         {currentVideoIndex < playlist.length - 1 && (
           <button
-            class="p-3 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none"
+            class="p-3 rounded-full bg-gray-900 hover:bg-gray-700 focus:outline-none"
             onClick={SiguientePlay}
           >
             <ForwardIcon className="w-5" />
@@ -127,8 +126,8 @@ const YouTubePlayer = ({
       </div>
       <div className="progress-container">
         <div className="progress-bar" style={{ width: `${progress}%` }}></div>{" "}
-      </div>{" "}
-      <div class="flex justify-between mt-2 text-sm text-gray-600">
+      </div>
+      <div class="flex justify-between mt-2 text-sm">
         <span>1:57</span>
         <span>3:53</span>
       </div>

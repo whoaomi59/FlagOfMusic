@@ -6,9 +6,15 @@ import {
   BackwardIcon,
   ForwardIcon,
   MusicalNoteIcon,
+  PauseCircleIcon,
+  PauseIcon,
+  PlayIcon,
   RadioIcon,
   SpeakerWaveIcon,
+  SpeakerXMarkIcon,
 } from "@heroicons/react/24/outline";
+import Page404 from "./layout/404";
+import Appbar from "./components/navbar";
 
 const KEY = "AIzaSyBpiMLwFIt0tCEtFXU5L_gQkiaReQNy5GI";
 
@@ -18,13 +24,13 @@ function App() {
   const [playlist, setPlaylist] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  console.log("🚀 ~ App ~ currentVideoIndex:", currentVideoIndex);
 
   const handleInputChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     fetch(
       `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${encodeURIComponent(
         searchQuery
@@ -33,10 +39,12 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         if (data.items.length > 0) {
+          console.log(data.items);
           const videoData = data.items.map((item) => ({
             id: item.id.videoId,
             title: item.snippet.title, // Añade el título de la canción
             img: item.snippet.thumbnails.default.url,
+            autor: item.snippet.channelTitle,
           }));
           setPlaylist(videoData); // Ahora es un array de objetos con id y title
           setSearchQuery(""); // Limpia el campo de búsqueda
@@ -73,119 +81,149 @@ function App() {
     }
   };
 
-  const CambiarPlay = (index) => {
-    setCurrentVideoIndex(index);
-  };
-
   return (
-    <div className="App">
-      <header className="App-header p-6">
-        <div class="bg-white flex px-1 py-1 rounded-full border border-blue-500 overflow-hidden max-w-md mx-auto font-[sans-serif]">
-          <input
-            type="email"
-            placeholder="Introduce el nombre de la canción"
-            class="w-full outline-none bg-white pl-4 text-sm"
-            value={searchQuery}
-            onChange={handleInputChange}
-          />
-          <button
-            type="button"
-            class="bg-blue-600 hover:bg-blue-700 transition-all text-white text-sm rounded-full px-5 py-2.5"
-            onClick={handleSearch}
-          >
-            Buscar
-          </button>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-          <div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] px-6 py-8 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4">
-            <div class="flex flex-wrap items-center gap-4">
-              <h3 class="text-xl font-bold flex-1 text-gray-800">Resultados</h3>
-            </div>
-            {showResults && (
-              <div class="mt-8 space-y-4">
-                {playlist.map((item, index) => (
-                  <div
-                    key={index}
-                    class="flex flex-wrap items-center cursor-pointer shadow-[0_2px_6px_-1px_rgba(0,0,0,0.3)] rounded-lg w-full p-4"
-                  >
-                    <img src={item.img} class="w-10 h-10 rounded-full" />{" "}
-                    <div class="ml-4 flex-1">
-                      {index === currentVideoIndex ? (
-                        <p class="text-sm text-blue-600 font-semibold">
-                          {item.title} (Reproduciendo...)
-                        </p>
-                      ) : (
-                        <p class="text-sm text-gray-800 font-semibold">
-                          {item.title}
-                        </p>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => setCurrentVideoIndex(index)}
-                      type="button"
-                      class="px-5 py-2.5 flex items-center text-sm tracking-wider outline-none bg-blue-100 rounded"
-                    >
-                      <RadioIcon className="w-4 text-blue-700" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          <div className="bg-gray-100">
-            {videoInfo && (
-              <div class=" p-4 flex justify-center items-center">
-                <div class="bg-white p-8 rounded-lg shadow-md w-100">
-                  <img
-                    src={videoInfo.snippet.thumbnails.default.url}
-                    alt={videoInfo.snippet.title}
-                    class="w-70 h-64 mx-auto rounded-lg mb-4 shadow-lg shadow-teal-50"
-                  />
-                  <h2 class="text-xl font-semibold text-center">
-                    {videoInfo.snippet.title}
-                  </h2>
-                  <p class="text-gray-600 text-sm text-center">
-                    Vistas: {videoInfo.statistics.viewCount}
-                  </p>
-                  <div className="">
-                    {playlist.length > 0 && (
-                      <YouTubePlayer
-                        videoId={playlist[currentVideoIndex].id}
-                        onEnd={SiguientePlay}
-                        currentVideoIndex={currentVideoIndex}
-                        AnterioPlay={AnterioPlay}
-                        SiguientePlay={SiguientePlay}
-                        playlist={playlist}
-                      />
-                    )}
-                  </div>
+    <div className="min-h-screen bg-black text-white">
+      <Appbar
+        searchQuery={searchQuery}
+        handleInputChange={handleInputChange}
+        handleSearch={handleSearch}
+      />
+      {playlist.length > 0 ? (
+        <main className="p-6">
+          {videoInfo && (
+            <div class=" p-4 flex justify-center items-center">
+              <div class="bg-gray-800 p-8 rounded-lg shadow-md w-100">
+                <img
+                  src={videoInfo.snippet.thumbnails.default.url}
+                  alt={videoInfo.snippet.title}
+                  class="w-70 h-64 mx-auto rounded-lg mb-4 shadow-lg shadow-teal-50"
+                />
+                <h2 class="text-xl font-semibold text-center p-2">
+                  {videoInfo.snippet.title}
+                </h2>
+                Autor: {videoInfo.snippet.channelTitle}
+                <p class="text-gray-300 text-sm text-center p-2">
+                  Vistas: {videoInfo.statistics.viewCount}
+                </p>
+                <div className="">
+                  {playlist.length > 0 && (
+                    <YouTubePlayer
+                      videoId={playlist[currentVideoIndex].id}
+                      onEnd={SiguientePlay}
+                      currentVideoIndex={currentVideoIndex}
+                      AnterioPlay={AnterioPlay}
+                      SiguientePlay={SiguientePlay}
+                      playlist={playlist}
+                    />
+                  )}
                 </div>
               </div>
-            )}
-            <div className="p-6">
-              <h3>Lista de Reproducción</h3>
-              <ul>
-                {playlist.map((data, index) => (
-                  <li key={index}>
-                    {index === currentVideoIndex ? (
-                      <strong>{data.title} (Reproduciendo)</strong>
-                    ) : (
-                      <span>{data.title}</span>
-                    )}
-                    <button
-                      type="button"
-                      class="px-5 py-2.5 rounded-lg text-white text-sm tracking-wider font-medium border border-current outline-none bg-blue-700 hover:bg-blue-800 active:bg-blue-700"
-                      onClick={() => CambiarPlay(index)}
-                    >
-                      <MusicalNoteIcon className="w-3" />
-                    </button>
-                  </li>
-                ))}
-              </ul>
             </div>
+          )}
+          <div class="flex flex-wrap items-center gap-4 ">
+            <h1 class="text-xl font-bold">Resultados</h1>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {showResults && (
+              <>
+                {playlist.map((item, index) => (
+                  <>
+                    {index === currentVideoIndex ? (
+                      <div
+                        className="bg-gray-600 rounded-lg p-4 flex flex-col"
+                        key={index}
+                      >
+                        <img
+                          src={item.img}
+                          alt="Album Cover"
+                          className="w-full mb-4 rounded-lg"
+                        />{" "}
+                        {index === currentVideoIndex ? (
+                          <h3 className="text-blue-600 font-semibold">
+                            {" "}
+                            {item.title} (Reproduciendo...)
+                          </h3>
+                        ) : (
+                          <h3 className="font-semibold">{item.title}</h3>
+                        )}
+                        <p className="text-sm">Artista, {item.autor}</p>
+                        <button
+                          type="button"
+                          class="!mt-8 w-full px-4 py-2.5 mx-auto block text-sm bg-gray-900 text-white rounded hover:bg-blue-600"
+                          onClick={() => setCurrentVideoIndex(index)}
+                        >
+                          Reproduciendo......
+                        </button>
+                      </div>
+                    ) : (
+                      <div
+                        className="bg-gray-800 rounded-lg p-4 flex flex-col"
+                        key={index}
+                      >
+                        <img
+                          src={item.img}
+                          alt="Album Cover"
+                          className="w-full mb-4 rounded-lg"
+                        />{" "}
+                        <h3 className="font-semibold">{item.title}</h3>
+                        <p className="text-sm">Artista, {item.autor}</p>
+                        <button
+                          type="button"
+                          class="!mt-8 w-full px-4 py-2.5 mx-auto block text-sm bg-gray-900 text-white rounded hover:bg-blue-600"
+                          onClick={() => setCurrentVideoIndex(index)}
+                        >
+                          Reproducir
+                        </button>
+                      </div>
+                    )}
+                  </>
+                ))}
+              </>
+            )}
+          </div>
+        </main>
+      ) : (
+        <div className="TOP">
+          <Page404 />
+        </div>
+      )}
+      <div className="musics">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            src="https://i.ytimg.com/vi/9XDGkg0PUZI/default.jpg"
+            className="img-track"
+          />
+          <button class="p-3 rounded-full bg-gray-900 hover:bg-gray-700 focus:outline-none">
+            <BackwardIcon className="w-5" />
+          </button>
+          <button className="p-4 rounded-full bg-gray-900 hover:bg-gray-700 focus:outline-none mx-4">
+            <PauseCircleIcon className="w-7" />
+          </button>
+          <button class="p-3 rounded-full bg-gray-900 hover:bg-gray-700 focus:outline-none">
+            <ForwardIcon className="w-5" />
+          </button>
+          <div className="progress-container">
+            <div className="progress-bar" style={{ width: `122%` }}></div>
+          </div>{" "}
+          <div className="volumen">
+            <SpeakerXMarkIcon className="w-6" />
+            <input
+              type="range"
+              className="w-full"
+              min="0"
+              max="100"
+              id="myRange"
+            />
+            <SpeakerWaveIcon className="w-6" />
           </div>
         </div>
-      </header>
+      </div>
     </div>
   );
 }

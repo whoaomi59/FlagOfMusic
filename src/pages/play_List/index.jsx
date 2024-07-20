@@ -21,7 +21,7 @@ export default function PLayList({
                   />
 
                   <div class="py-4">
-                    <h4 class="text-gray-700 text-base font-bold">
+                    <h4 class="text-blue-500 text-base font-bold">
                       {item.title}
                     </h4>
                     <div class="space-x-4 mt-4">

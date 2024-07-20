@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import YouTubePlayer from "./components/YouTubePlayer";
 import "./App.css";
 
-import Page404 from "./layout/404";
 import Appbar from "./components/Menu_Navigate";
-import TrackMusic from "./components/track_music";
-import PLayList from "./pages/play_List";
+
 import Layout from "./layout/layout";
 
 const KEY = "AIzaSyBpiMLwFIt0tCEtFXU5L_gQkiaReQNy5GI";

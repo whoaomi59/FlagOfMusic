@@ -12,7 +12,7 @@ export default function TrackMusic() {
       <div className="flex items-center gap-4">
         <img
           src={"https://i.ytimg.com/vi/GHlN4RKgH0o/maxresdefault.jpg"}
-          className="rounded-md w-[65px]"
+          className="rounded-md w-[70px]"
           alt="music"
         />
       </div>

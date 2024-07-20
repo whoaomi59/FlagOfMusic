@@ -134,7 +134,14 @@ const YouTubePlayer = ({
       </div> */}
       <div className="w-full fixed bottom-0 bg-[#000] h-20 md:py-[44px] py-2 px-5 flex items-center justify-between z-50">
         <div className="flex items-center gap-4">
-          <img src={img} className="rounded-md w-[65px]" alt="music" />
+          <img
+            src={img}
+            className="w-[75px]"
+            alt="music"
+            style={{
+              borderRadius: "100px",
+            }}
+          />
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-4 w-full">

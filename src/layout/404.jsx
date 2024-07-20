@@ -8,7 +8,7 @@ export default function Page404() {
         </div>
         <div class="flex flex-col items-end justify-center text-right px-8 relative bg-[#262464] rounded-tl-[206px] z-20 before:absolute before:inset-0 before:!left-auto before:bg-[#293587] before:w-2/3 before:rounded-bl-[206px] before:-z-10">
           <h3 class="font-bold sm:text-4xl text-2xl text-yellow-400">
-            Busca tu cancion favorita.
+            Busca tu canción favorita.
           </h3>
           <p class="text-sm text-gray-300 mt-4">Canciones 100% Free.</p>
           <button

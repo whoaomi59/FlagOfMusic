@@ -7,14 +7,7 @@ export default function Appbar({
 }) {
   return (
     <nav className="flex items-center justify-between p-6 bg-gray-900">
-      <div className="text-xl font-bold flex">
-        The Pirate YTB
-        <img
-          src="/img/pngfind.com-pirate-flag-png-2847145.png"
-          alt="logo"
-          width="30px"
-        />
-      </div>
+      <div className="text-xl font-bold flex">ThePirateYTB</div>
       <div>
         <form onSubmit={handleSearch}>
           <Search

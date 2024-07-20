@@ -133,7 +133,7 @@ const YouTubePlayer = ({
         <span>3:53</span>
       </div> */}
       <div className="w-full fixed bottom-0 bg-[#000] h-20 md:py-[44px] py-2 px-5 flex items-center justify-between z-50">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <img
             src={img}
             className="w-[75px]"
@@ -142,6 +142,12 @@ const YouTubePlayer = ({
               borderRadius: "100px",
             }}
           />
+          <div className="flex flex-col gap-1">
+            <span className="text-[15px] font-medium opacity-85">
+              Night Wolf
+            </span>
+            <span className="text-[13px] text-[#b3b3b3]">The villians</span>
+          </div>
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-4 w-full">

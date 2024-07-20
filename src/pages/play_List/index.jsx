@@ -7,61 +7,64 @@ export default function PLayList({
   setCurrentVideoIndex,
 }) {
   return (
-    <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-8 text-center mt-16 max-w-5xl max-lg:max-w-3xl max-md:max-w-xl mx-auto">
-      {" "}
-      {showResults && (
-        <>
-          {playlist.map((item, index) => (
-            <>
-              {index === currentVideoIndex ? (
-                <div>
-                  <img
-                    src={item.img}
-                    class="w-32 h-32 rounded-full inline-block"
-                  />
-
-                  <div class="py-4">
-                    <h4 class="text-blue-500 text-base font-bold">
-                      {item.title}
-                    </h4>
-                    <div class="space-x-4 mt-4">
-                      <button
-                        onClick={() => setCurrentVideoIndex(index)}
-                        type="button"
-                        class="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-gray-700 hover:bg-gray-200"
-                      >
-                        <MinusCircleIcon class="h-6" />
-                      </button>
+    <div className="w-full flex flex-col md:gap-4 gap-6 px-2">
+      <div className="w-full flex items-center justify-between">
+        <span className="font-semibold text-[20px]">{"Resultados"}</span>
+        <a href="#" className="text-[#1ed760] text-[13.5px] font-medium">
+          See More
+        </a>
+      </div>
+      <div class="grid lg:grid-cols-3 sm:grid-cols-2 gap-8 max-sm:gap-12 max-md:justify-center mt-16">
+        {showResults && (
+          <>
+            {playlist.map((item, index) => (
+              <>
+                {index === currentVideoIndex ? (
+                  <a onClick={() => setCurrentVideoIndex(index)}>
+                    <div class="flex gap-6 overflow-hidden cursor-pointer">
+                      <div class="w-24 h-24 shrink-0 bg-gray-800 p-3 overflow-hidden aspect-w-16 aspect-h-8 rounded-lg">
+                        <img
+                          src={item.img}
+                          alt="product1"
+                          class="h-full w-full object-contain"
+                        />
+                      </div>
+                      <div>
+                        <h3 class="text-base font-bold text-blue-500">
+                          {item.title}
+                        </h3>
+                        <h4 class="text-lg text-gray-600 font-bold mt-2">
+                          {item.autor}
+                        </h4>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  <img
-                    src={item.img}
-                    class="w-32 h-32 rounded-full inline-block"
-                  />
-
-                  <div class="py-4">
-                    <h4 class="text-gray-200 text-base font-bold">
-                      {item.title}
-                    </h4>
-                    <div class="space-x-4 mt-4">
-                      <button
-                        onClick={() => setCurrentVideoIndex(index)}
-                        type="button"
-                        class="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-gray-700 hover:bg-gray-200"
-                      >
-                        <MinusCircleIcon class="h-6" />
-                      </button>
+                  </a>
+                ) : (
+                  <a onClick={() => setCurrentVideoIndex(index)}>
+                    <div class="flex gap-6 overflow-hidden cursor-pointer">
+                      <div class="w-24 h-24 shrink-0 bg-gray-800 p-3 overflow-hidden aspect-w-16 aspect-h-8 rounded-lg">
+                        <img
+                          src={item.img}
+                          alt="product1"
+                          class="h-full w-full object-contain"
+                        />
+                      </div>
+                      <div>
+                        <h3 class="text-base font-bold text-gray-100">
+                          {item.title}
+                        </h3>
+                        <h4 class="text-lg text-gray-600 font-bold mt-2">
+                          {item.autor}
+                        </h4>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              )}
-            </>
-          ))}
-        </>
-      )}
+                  </a>
+                )}
+              </>
+            ))}
+          </>
+        )}
+      </div>
     </div>
   );
 }

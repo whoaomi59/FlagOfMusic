@@ -18,7 +18,7 @@ const Sidebar = ({
   ];
   return (
     <div
-      className="md:h-screen h-fit md:w-[350px] w-full bg-[#121212] md:absolute block md:left-0 top-0 p-5 z-30"
+      className="md:h-screen h-auto md:w-[350px] w-full bg-[#121212] md:absolute block md:left-0 top-0 p-5 z-30"
       style={{
         overflowY: "scroll",
       }}

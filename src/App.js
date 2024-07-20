@@ -75,22 +75,22 @@ function App() {
 
   return (
     <div className="min-h-screen text-white">
+      <Appbar
+        searchQuery={searchQuery}
+        handleInputChange={handleInputChange}
+        handleSearch={handleSearch}
+      />
       <Layout
         showResults={showResults}
         playlist={playlist}
         currentVideoIndex={currentVideoIndex}
         setCurrentVideoIndex={setCurrentVideoIndex}
       />
-      <Appbar
-        searchQuery={searchQuery}
-        handleInputChange={handleInputChange}
-        handleSearch={handleSearch}
-      />
-      {playlist.length > 0 ? (
-        <main className="p-6">
-          {videoInfo && (
-            <div class=" p-4 flex justify-center items-center">
-              <div class="bg-gray-800 p-8 rounded-lg shadow-md w-100">
+
+      <main>
+        {videoInfo && (
+          <div /* class=" p-4 flex justify-center items-center" */>
+            {/*               <div class="bg-gray-800 p-8 rounded-lg shadow-md w-100">
                 <img
                   src={videoInfo.snippet.thumbnails.default.url}
                   alt={videoInfo.snippet.title}
@@ -103,41 +103,26 @@ function App() {
                 <p class="text-gray-300 text-sm text-center p-2">
                   Vistas: {videoInfo.statistics.viewCount}
                 </p>
-                <div className="">
-                  {playlist.length > 0 && (
-                    <YouTubePlayer
-                      videoId={playlist[currentVideoIndex].id}
-                      onEnd={SiguientePlay}
-                      currentVideoIndex={currentVideoIndex}
-                      AnterioPlay={AnterioPlay}
-                      SiguientePlay={SiguientePlay}
-                      playlist={playlist}
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-          <div class="flex flex-wrap items-center gap-4 ">
-            <h1 class="text-4xl font-extrabold text-gray-500 mb-12">
-              Resultados
-            </h1>
+              </div> */}
+            {playlist.length > 0 && (
+              <YouTubePlayer
+                img={videoInfo.snippet.thumbnails.default.url}
+                videoId={playlist[currentVideoIndex].id}
+                onEnd={SiguientePlay}
+                currentVideoIndex={currentVideoIndex}
+                AnterioPlay={AnterioPlay}
+                SiguientePlay={SiguientePlay}
+                playlist={playlist}
+              />
+            )}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <PLayList
-              showResults={showResults}
-              playlist={playlist}
-              currentVideoIndex={currentVideoIndex}
-              setCurrentVideoIndex={setCurrentVideoIndex}
-            />
-          </div>
-        </main>
-      ) : (
-        <div className="TOP">
-          <Page404 />
+        )}
+        <div class="flex flex-wrap items-center gap-4 ">
+          <h1 class="text-4xl font-extrabold text-gray-500 mb-12">
+            Resultados
+          </h1>
         </div>
-      )}
-      <TrackMusic />
+      </main>
     </div>
   );
 }

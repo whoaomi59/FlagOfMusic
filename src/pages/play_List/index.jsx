@@ -1,3 +1,5 @@
+import { MinusCircleIcon } from "@heroicons/react/24/outline";
+
 export default function PLayList({
   showResults,
   playlist,
@@ -5,62 +7,61 @@ export default function PLayList({
   setCurrentVideoIndex,
 }) {
   return (
-    <>
+    <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-8 text-center mt-16 max-w-5xl max-lg:max-w-3xl max-md:max-w-xl mx-auto">
+      {" "}
       {showResults && (
         <>
           {playlist.map((item, index) => (
             <>
               {index === currentVideoIndex ? (
-                <div
-                  className="bg-gray-600 rounded-lg p-4 flex flex-col"
-                  key={index}
-                >
+                <div>
                   <img
                     src={item.img}
-                    alt="Album Cover"
-                    className="w-full mb-4 rounded-lg"
+                    class="w-32 h-32 rounded-full inline-block"
                   />
-                  {index === currentVideoIndex ? (
-                    <h3 className="text-blue-600 font-semibold">
-                      {item.title} (Reproduciendo...)
-                    </h3>
-                  ) : (
-                    <h3 className="font-semibold">{item.title}</h3>
-                  )}
-                  <p className="text-sm">Artista, {item.autor}</p>
-                  <button
-                    type="button"
-                    class="!mt-8 w-full px-4 py-2.5 mx-auto block text-sm bg-gray-900 text-white rounded hover:bg-blue-600"
-                    onClick={() => setCurrentVideoIndex(index)}
-                  >
-                    Reproduciendo......
-                  </button>
+
+                  <div class="py-4">
+                    <h4 class="text-gray-700 text-base font-bold">
+                      {item.title}
+                    </h4>
+                    <div class="space-x-4 mt-4">
+                      <button
+                        onClick={() => setCurrentVideoIndex(index)}
+                        type="button"
+                        class="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-gray-700 hover:bg-gray-200"
+                      >
+                        <MinusCircleIcon class="h-6" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ) : (
-                <div
-                  className="bg-gray-800 rounded-lg p-4 flex flex-col"
-                  key={index}
-                >
+                <div>
                   <img
                     src={item.img}
-                    alt="Album Cover"
-                    className="w-full mb-4 rounded-lg"
-                  />{" "}
-                  <h3 className="font-semibold">{item.title}</h3>
-                  <p className="text-sm">Artista, {item.autor}</p>
-                  <button
-                    type="button"
-                    class="!mt-8 w-full px-4 py-2.5 mx-auto block text-sm bg-gray-900 text-white rounded hover:bg-blue-600"
-                    onClick={() => setCurrentVideoIndex(index)}
-                  >
-                    Reproducir
-                  </button>
+                    class="w-32 h-32 rounded-full inline-block"
+                  />
+
+                  <div class="py-4">
+                    <h4 class="text-gray-200 text-base font-bold">
+                      {item.title}
+                    </h4>
+                    <div class="space-x-4 mt-4">
+                      <button
+                        onClick={() => setCurrentVideoIndex(index)}
+                        type="button"
+                        class="w-7 h-7 inline-flex items-center justify-center rounded-full border-none outline-none bg-gray-700 hover:bg-gray-200"
+                      >
+                        <MinusCircleIcon class="h-6" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               )}
             </>
           ))}
         </>
       )}
-    </>
+    </div>
   );
 }

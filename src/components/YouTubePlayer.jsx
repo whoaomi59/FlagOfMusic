@@ -18,6 +18,7 @@ const YouTubePlayer = ({
   AnterioPlay,
   SiguientePlay,
   playlist,
+  img,
 }) => {
   const playerRef = useRef(null);
   const [valVol, setVlue] = useState("");
@@ -79,7 +80,7 @@ const YouTubePlayer = ({
   return (
     <div>
       <YouTube videoId={videoId} opts={opts} onReady={onReady} onEnd={onEnd} />
-      <div className="volumen">
+      {/*       <div className="volumen">
         <SpeakerXMarkIcon className="w-6" />
         <input
           type="range"
@@ -130,6 +131,73 @@ const YouTubePlayer = ({
       <div class="flex justify-between mt-2 text-sm">
         <span>1:57</span>
         <span>3:53</span>
+      </div> */}
+      <div className="w-full fixed bottom-0 bg-[#000] h-20 md:py-[44px] py-2 px-5 flex items-center justify-between z-50">
+        <div className="flex items-center gap-4">
+          <img src={img} className="rounded-md w-[65px]" alt="music" />
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 w-full">
+            {currentVideoIndex > 0 && (
+              <button
+                class="p-3 rounded-full bg-gray-900 hover:bg-gray-700 focus:outline-none"
+                onClick={AnterioPlay}
+              >
+                <BackwardIcon className="w-6" />
+              </button>
+            )}
+            {status ? (
+              <button
+                className="p-4 rounded-full bg-gray-900 hover:bg-gray-700 focus:outline-none mx-4"
+                onClick={handlePause}
+              >
+                <PauseCircleIcon width="36px" />
+              </button>
+            ) : (
+              <button
+                className="p-4 rounded-full bg-gray-900 hover:bg-gray-700 focus:outline-none mx-4"
+                onClick={handlePlay}
+              >
+                <PlayIcon width="36px" />
+              </button>
+            )}
+            {currentVideoIndex < playlist.length - 1 && (
+              <button
+                class="p-3 rounded-full bg-gray-900 hover:bg-gray-700 focus:outline-none"
+                onClick={SiguientePlay}
+              >
+                <ForwardIcon className="w-6" />
+              </button>
+            )}
+            <div className="flex items-center w-full gap-2">
+              <span className="text-[#b3b3b3] text-[14px] font-medium md:block hidden">
+                00:00
+              </span>
+              <div className="md:w-[950px] w-[110px] bg-[#4d4d4d] rounded-md h-[6px] relative cursor-pointer">
+                <div
+                  className="progress-bar"
+                  style={{ width: `${progress}%` }}
+                ></div>
+              </div>
+              <span className="text-[#b3b3b3] text-[14px] font-medium md:block hidden">
+                100:00
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden md:flex items-center gap-3">
+          <SpeakerXMarkIcon className="w-6" />
+          <input
+            type="range"
+            className="w-full"
+            min="0"
+            max="100"
+            onChange={handleVolumeChange}
+            id="myRange"
+          />
+          <SpeakerWaveIcon className="w-6" />
+        </div>
       </div>
     </div>
   );

@@ -121,7 +121,9 @@ function App() {
             </div>
           )}
           <div class="flex flex-wrap items-center gap-4 ">
-            <h1 class="text-xl font-bold">Resultados</h1>
+            <h1 class="text-4xl font-extrabold text-gray-500 mb-12">
+              Resultados
+            </h1>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {showResults && (
